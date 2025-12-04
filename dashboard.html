@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebyte | Dashboard</title>
+
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <!-- ICONO -->
+    <link rel="icon" type="image/png" href="assets/logo.png">
+
+    <!-- CHART.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JS -->
+    <script src="js/dashboard.js" defer></script>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/logo.png" alt="Rebyte Logo">
+            <h2>Rebyte</h2>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="active"><span>📊</span> Panel</li>
+            <li><span>🛠️</span> Tickets</li>
+            <li><span>👤</span> Clientes</li>
+            <li><span>📝</span> Reportes</li>
+            <li><span>⚙️</span> Configuración</li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <button id="logoutBtn">Cerrar sesión</button>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="dashboard-header">
+            <h1>Panel de Control</h1>
+            <div class="user-info">
+                <span>👋 Hola, Admin</span>
+            </div>
+        </header>
+
+        <!-- CARDS -->
+        <section class="cards">
+
+            <div class="card">
+                <h3>Tickets Activos</h3>
+                <p class="number">12</p>
+            </div>
+
+            <div class="card">
+                <h3>Tickets Resueltos</h3>
+                <p class="number">87</p>
+            </div>
+
+            <div class="card">
+                <h3>Clientes Atendidos</h3>
+                <p class="number">34</p>
+            </div>
+
+            <div class="card">
+                <h3>Satisfacción</h3>
+                <p class="number">95%</p>
+            </div>
+
+        </section>
+
+        <!-- GRAFICAS -->
+        <section class="charts">
+
+            <div class="chart-container">
+                <h3>Tickets por Mes</h3>
+                <canvas id="ticketsChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3>Tipos de Soporte</h3>
+                <canvas id="typesChart"></canvas>
+            </div>
+
+        </section>
+
+        <!-- TABLA -->
+        <section class="table-section">
+            <h3>Últimos Tickets</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Problema</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+
+                <tbody id="ticketsTable">
+                    <!-- Rellenado por JS -->
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+</body>
+</html>
+
