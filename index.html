@@ -1,97 +1,102 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>ReByte | Soporte Técnico</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
-<canvas id="stars"></canvas>
+  <!-- Fondo estrellas -->
+  <canvas id="stars"></canvas>
 
-<header class="header">
-  <div class="logo">
-    <img src="assets/img/logo.png" alt="ReByte">
-    <span>Cuidamos lo que te conecta</span>
-  </div>
+  <!-- HEADER -->
+  <header>
+    <div class="logo-container">
+      <img src="assets/img/logo.png" alt="ReByte logo" class="logo">
+    </div>
 
-  <nav>
-    <ul class="menu">
-      <li><a href="#inicio">Inicio</a></li>
+    <nav class="nav">
+      <a href="#inicio">Inicio</a>
 
-      <li class="nav-item">
-        <span>Servicios ▾</span>
-        <ul class="dropdown">
-          <li><a href="#planes">Planes</a></li>
-          <li><a href="#contacto">Soporte</a></li>
+      <div class="dropdown">
+        <button class="dropbtn">Servicios ▾</button>
+        <div class="dropdown-content">
+          <a href="#planes">Planes</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+
+      <a href="#contacto" class="btn-nav">Soporte urgente</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <h1>ReByte</h1>
+    <p>Cuidamos lo que te conecta</p>
+  </section>
+
+  <!-- PLANES -->
+  <section id="planes" class="planes">
+    <h2>Planes</h2>
+
+    <div class="planes-grid">
+      <div class="plan-card">
+        <h3>Básico</h3>
+        <span class="price">$40.000</span>
+        <ul>
+          <li>Chequeo anual</li>
+          <li>Soporte remoto 72h</li>
+          <li>Descuento en repuestos</li>
         </ul>
-      </li>
+        <button class="btn">Elegir</button>
+      </div>
 
-      <li><a href="#contacto">Contacto</a></li>
-      <li><a class="urgent" href="#contacto">Soporte urgente</a></li>
-    </ul>
-  </nav>
-</header>
+      <div class="plan-card destacado">
+        <h3>Profesional</h3>
+        <span class="price">$75.000</span>
+        <ul>
+          <li>Mantenimiento semestral</li>
+          <li>Soporte remoto 24h</li>
+          <li>1 visita in situ</li>
+        </ul>
+        <button class="btn">Elegir</button>
+      </div>
 
-<section id="inicio" class="hero">
-  <h1>Soporte técnico confiable</h1>
-  <p>Computadores y portátiles — hogares y empresas</p>
-</section>
-
-<section id="planes" class="planes">
-  <h2>Planes</h2>
-
-  <div class="cards">
-    <div class="card">
-      <h3>Básico</h3>
-      <p class="price">$40.000</p>
-      <ul>
-        <li>Chequeo anual</li>
-        <li>Soporte remoto 72h</li>
-        <li>Descuento en repuestos</li>
-      </ul>
-      <button>Elegir</button>
+      <div class="plan-card">
+        <h3>Corporativo</h3>
+        <span class="price">$140.000</span>
+        <ul>
+          <li>Soporte ilimitado</li>
+          <li>Prioridad 24/7</li>
+          <li>Contrato y SLA</li>
+        </ul>
+        <button class="btn">Elegir</button>
+      </div>
     </div>
+  </section>
 
-    <div class="card highlight">
-      <h3>Profesional</h3>
-      <p class="price">$75.000</p>
-      <ul>
-        <li>Mantenimiento semestral</li>
-        <li>Soporte remoto 24h</li>
-        <li>1 visita in situ</li>
-      </ul>
-      <button>Elegir</button>
-    </div>
+  <!-- CONTACTO -->
+  <section id="contacto" class="contacto">
+    <h2>Contáctanos</h2>
 
-    <div class="card">
-      <h3>Corporativo</h3>
-      <p class="price">$140.000</p>
-      <ul>
-        <li>Soporte ilimitado</li>
-        <li>Prioridad 24/7</li>
-        <li>Contrato y SLA</li>
-      </ul>
-      <button>Elegir</button>
-    </div>
-  </div>
-</section>
+    <form class="contact-form">
+      <input type="text" placeholder="Nombre" required>
+      <input type="email" placeholder="Correo" required>
+      <textarea placeholder="Mensaje"></textarea>
+      <button class="btn">Enviar</button>
+    </form>
+  </section>
 
-<section id="contacto" class="contacto">
-  <h2>Contacto</h2>
+  <!-- WhatsApp -->
+  <a href="https://wa.me/573000000000" class="whatsapp" target="_blank">💬</a>
 
-  <form>
-    <input type="text" placeholder="Nombre" required>
-    <input type="email" placeholder="Correo" required>
-    <textarea placeholder="Mensaje"></textarea>
-    <button type="submit">Enviar</button>
-  </form>
-</section>
-
-<a class="whatsapp" href="https://wa.me/573000000000" target="_blank">💬</a>
-
-<script src="assets/js/main.js"></script>
+  <!-- JS -->
+  <script src="js/main.js"></script>
 </body>
 </html>
