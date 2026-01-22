@@ -61,3 +61,8 @@ if (window.location.pathname.endsWith('dashboard.html')) {
     // ignore on index
   }
 }
+// Animación suave al cargar
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.style.opacity = 1;
+});
+
