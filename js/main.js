@@ -135,18 +135,23 @@ form.addEventListener("submit", async (e) => {
 
   const formData = new FormData(form);
 
-  const res = await fetch("https://script.google.com/macros/s/AKfycbxzbiMcjN7j3AKyyrtMe8iC9Gje2bTRaYXskFLSmZWYFSQpi1_MZzxeZ43lqZ0Y3pNp/exec", {
-    method: "POST",
-    body: formData
-  });
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbxzbiMcjN7j3AKyyrtMe8iC9Gje2bTRaYXskFLSmZWYFSQpi1_MZzxeZ43lqZ0Y3pNp/exec", {
+      method: "POST",
+      mode: "no-cors",   // 🔑 evita bloqueo CORS
+      body: formData
+    });
 
-  const data = await res.json();
+    respuesta.innerHTML = `
+      ✅ Mensaje enviado correctamente.<br>
+      En breve nos comunicaremos contigo.
+    `;
 
-  respuesta.innerHTML = `
-    ✅ Gracias por contactarnos.<br>
-    Tu número de guía es:<br>
-    <strong>${data.guia}</strong>
-  `;
+    form.reset();
 
-  form.reset();
+  } catch (error) {
+    console.error(error);
+    respuesta.innerHTML = "❌ Error al enviar el formulario.";
+  }
 });
+
