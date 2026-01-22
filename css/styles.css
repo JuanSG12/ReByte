@@ -218,3 +218,66 @@ section,
   filter: drop-shadow(0 0 12px rgba(56,189,248,.5));
 }
 
+/* ===== MODAL PLAN ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.modal-content {
+  background: rgba(15,23,42,.9);
+  border-radius: 22px;
+  padding: 35px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 0 40px rgba(56,189,248,.4);
+  animation: modalIn .3s ease;
+}
+
+@keyframes modalIn {
+  from {
+    transform: scale(.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+}
+
+.modal-content p {
+  opacity: .85;
+  margin-bottom: 15px;
+}
+
+.modal-content ul {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.modal-content li {
+  margin: 6px 0;
+}
+
+.close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.modal-btn {
+  text-align: center;
+  display: block;
+}

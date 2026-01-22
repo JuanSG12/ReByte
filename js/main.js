@@ -72,4 +72,55 @@ dropBtn.addEventListener("click", (e) => {
 document.addEventListener("click", () => {
   dropdown.classList.remove("show");
 });
+const plans = {
+  "Básico": {
+    desc: "Ideal para equipos personales o uso básico.",
+    features: [
+      "Chequeo anual",
+      "Soporte remoto 72h",
+      "Descuento en repuestos"
+    ]
+  },
+  "Profesional": {
+    desc: "Perfecto para negocios y trabajo continuo.",
+    features: [
+      "Mantenimiento semestral",
+      "Soporte remoto 24h",
+      "1 visita in situ"
+    ]
+  },
+  "Corporativo": {
+    desc: "Pensado para empresas y operaciones críticas.",
+    features: [
+      "Soporte ilimitado",
+      "Prioridad 24/7",
+      "Contrato y SLA"
+    ]
+  }
+};
+
+function openPlan(planName) {
+  const modal = document.getElementById("planModal");
+
+  document.getElementById("planTitle").innerText = planName;
+  document.getElementById("planDescription").innerText = plans[planName].desc;
+
+  const list = document.getElementById("planFeatures");
+  list.innerHTML = "";
+  plans[planName].features.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = "✔ " + item;
+    list.appendChild(li);
+  });
+
+  const whatsappMsg = `Hola, quiero contratar el plan ${planName} de ReByte`;
+  document.getElementById("planWhatsapp").href =
+    `https://wa.me/573001234567?text=${encodeURIComponent(whatsappMsg)}`;
+
+  modal.style.display = "flex";
+}
+
+function closePlan() {
+  document.getElementById("planModal").style.display = "none";
+}
 

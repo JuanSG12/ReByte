@@ -9,6 +9,21 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
+<!-- MODAL PLAN -->
+<div id="planModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closePlan()">&times;</span>
+
+    <h2 id="planTitle"></h2>
+    <p id="planDescription"></p>
+
+    <ul id="planFeatures"></ul>
+
+    <a id="planWhatsapp" class="btn modal-btn" target="_blank">
+      Contactar por WhatsApp
+    </a>
+  </div>
+</div>
 <body>
 
   <!-- Fondo estrellas -->
@@ -54,7 +69,7 @@
           <li>Soporte remoto 72h</li>
           <li>Descuento en repuestos</li>
         </ul>
-        <button class="btn">Elegir</button>
+        <button class="btn" onclick="openPlan('Básico')">Elegir</button>
       </div>
 
       <div class="plan-card destacado">
@@ -65,8 +80,8 @@
           <li>Soporte remoto 24h</li>
           <li>1 visita in situ</li>
         </ul>
-        <button class="btn">Elegir</button>
-      </div>
+        <button class="btn" onclick="openPlan('Profesional')">Elegir</button>
+        </div>
 
       <div class="plan-card">
         <h3>Corporativo</h3>
@@ -76,7 +91,7 @@
           <li>Prioridad 24/7</li>
           <li>Contrato y SLA</li>
         </ul>
-        <button class="btn">Elegir</button>
+        <button class="btn" onclick="openPlan('Corporativo')">Elegir</button>
       </div>
     </div>
   </section>
@@ -93,8 +108,13 @@
     </form>
   </section>
 
-  <!-- WhatsApp -->
-  <a href="https://wa.me/573000000000" class="whatsapp" target="_blank">💬</a>
+ <a href="https://wa.me/573125710763?text=Hola%20quiero%20soporte%20técnico%20con%20ReByte" 
+   class="whatsapp" 
+   target="_blank" 
+   rel="noopener">
+   💬
+</a>
+
 
   <!-- JS -->
   <script src="js/main.js"></script>
