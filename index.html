@@ -99,13 +99,20 @@
   <!-- CONTACTO -->
   <section id="contacto" class="contacto">
     <h2>Contáctanos</h2>
-
- <form class="contact-form" id="contactForm">
+<form 
+  class="contact-form"
+  id="contactForm"
+  action="https://script.google.com/macros/s/AKfycbxzbiMcjN7j3AKyyrtMe8iC9Gje2bTRaYXskFLSmZWYFSQpi1_MZzxeZ43lqZ0Y3pNp/exec"
+  method="POST"
+  target="hiddenFrame"
+>
   <input type="text" name="nombre" placeholder="Nombre" required>
   <input type="email" name="correo" placeholder="Correo" required>
   <textarea name="mensaje" placeholder="Mensaje"></textarea>
   <button class="btn">Enviar</button>
 </form>
+
+<iframe name="hiddenFrame" style="display:none;"></iframe>
 
 <div id="formRespuesta"></div>
 

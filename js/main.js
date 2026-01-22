@@ -123,35 +123,14 @@ function openPlan(planName) {
 function closePlan() {
   document.getElementById("planModal").style.display = "none";
 }
-
-// ================= FORMULARIO =================
+// ===== CONFIRMACION FORMULARIO =====
 const form = document.getElementById("contactForm");
 const respuesta = document.getElementById("formRespuesta");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  respuesta.innerHTML = "⏳ Enviando...";
-
-  const formData = new FormData(form);
-
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbxzbiMcjN7j3AKyyrtMe8iC9Gje2bTRaYXskFLSmZWYFSQpi1_MZzxeZ43lqZ0Y3pNp/exec", {
-      method: "POST",
-      mode: "no-cors",   // 🔑 evita bloqueo CORS
-      body: formData
-    });
-
-    respuesta.innerHTML = `
-      ✅ Mensaje enviado correctamente.<br>
-      En breve nos comunicaremos contigo.
-    `;
-
-    form.reset();
-
-  } catch (error) {
-    console.error(error);
-    respuesta.innerHTML = "❌ Error al enviar el formulario.";
-  }
+form.addEventListener("submit", () => {
+  respuesta.innerHTML = `
+    ✅ Mensaje enviado correctamente.<br>
+    En breve nos comunicaremos contigo.
+  `;
 });
 
