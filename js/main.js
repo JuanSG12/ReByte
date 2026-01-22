@@ -133,4 +133,46 @@ form.addEventListener("submit", () => {
     En breve nos comunicaremos contigo.
   `;
 });
+// ================= BUSCADOR DE GUIA =================
+
+async function buscarGuia() {
+  const guia = document.getElementById("guiaInput").value.trim();
+  const resultado = document.getElementById("resultadoGuia");
+
+  if (!guia) {
+    resultado.innerHTML = "⚠️ Ingresa una guía.";
+    return;
+  }
+
+  resultado.innerHTML = "🔎 Buscando...";
+
+  try {
+    const res = await fetch(
+      "https://script.google.com/macros/s/AKfycbxzbiMcjN7j3AKyyrtMe8iC9Gje2bTRaYXskFLSmZWYFSQpi1_MZzxeZ43lqZ0Y3pNp/exec" + guia
+    );
+
+    const data = await res.json();
+
+    if (!data.encontrado) {
+      resultado.innerHTML = "❌ Guía no encontrada.";
+      return;
+    }
+
+    resultado.innerHTML = `
+      <div class="plan-card">
+        <h3>Estado: ${data.estado}</h3>
+        <p>${data.comentario || ""}</p>
+        ${
+          data.foto
+            ? `<img src="${data.foto}" style="width:100%;border-radius:12px;margin-top:10px;">`
+            : ""
+        }
+      </div>
+    `;
+
+  } catch (err) {
+    console.error(err);
+    resultado.innerHTML = "❌ Error consultando guía.";
+  }
+}
 
