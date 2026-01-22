@@ -1,100 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>ReByte | Soporte Técnico</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReByte</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
 
-  <!-- Fondo estrellas -->
-  <canvas id="stars"></canvas>
-
   <!-- HEADER -->
-  <header>
-    <div class="logo-container">
-      <img src="assets/img/logo.png" alt="ReByte logo" class="logo">
+  <header class="header">
+    <div class="header-left">
+      <img src="assets/img/logo.png" alt="ReByte Logo" class="logo" />
+      <span class="slogan">Tecnología que responde</span>
     </div>
 
     <nav class="nav">
-      <a href="#inicio">Inicio</a>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
 
-      <div class="dropdown">
-        <button class="dropbtn">Servicios ▾</button>
-        <div class="dropdown-content">
-          <a href="#planes">Planes</a>
-          <a href="#contacto">Contacto</a>
-        </div>
-      </div>
+        <li class="nav-item">
+          <a>Servicios ▾</a>
+          <div class="dropdown">
+            <a href="#servicios">Servicios</a>
+            <a href="#soporte">Soporte urgente</a>
+          </div>
+        </li>
 
-      <a href="#contacto" class="btn-nav">Soporte urgente</a>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
     </nav>
   </header>
 
   <!-- HERO -->
   <section class="hero" id="inicio">
-    <h1>ReByte</h1>
-    <p>Cuidamos lo que te conecta</p>
+    <h1>Soluciones tecnológicas claras</h1>
+    <p>Soporte, mantenimiento y acompañamiento profesional</p>
   </section>
 
   <!-- PLANES -->
-  <section id="planes" class="planes">
+  <section class="planes" id="servicios">
     <h2>Planes</h2>
 
     <div class="planes-grid">
+
       <div class="plan-card">
         <h3>Básico</h3>
-        <span class="price">$40.000</span>
+        <p class="precio">$40.000</p>
         <ul>
           <li>Chequeo anual</li>
           <li>Soporte remoto 72h</li>
           <li>Descuento en repuestos</li>
         </ul>
-        <button class="btn">Elegir</button>
+        <button>Elegir</button>
       </div>
 
       <div class="plan-card destacado">
         <h3>Profesional</h3>
-        <span class="price">$75.000</span>
+        <p class="precio">$75.000</p>
         <ul>
           <li>Mantenimiento semestral</li>
           <li>Soporte remoto 24h</li>
           <li>1 visita in situ</li>
         </ul>
-        <button class="btn">Elegir</button>
+        <button>Elegir</button>
       </div>
 
       <div class="plan-card">
         <h3>Corporativo</h3>
-        <span class="price">$140.000</span>
+        <p class="precio">$140.000</p>
         <ul>
           <li>Soporte ilimitado</li>
           <li>Prioridad 24/7</li>
           <li>Contrato y SLA</li>
         </ul>
-        <button class="btn">Elegir</button>
+        <button>Elegir</button>
       </div>
+
     </div>
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto" class="contacto">
+  <section class="contacto" id="contacto">
     <h2>Contáctanos</h2>
 
     <form class="contact-form">
-      <input type="text" placeholder="Nombre" required>
-      <input type="email" placeholder="Correo" required>
+      <input type="text" placeholder="Nombre" required />
+      <input type="email" placeholder="Correo" required />
       <textarea placeholder="Mensaje"></textarea>
-      <button class="btn">Enviar</button>
+      <button type="submit">Enviar</button>
     </form>
   </section>
 
-  <!-- WhatsApp -->
-  <a href="https://wa.me/573000000000" class="whatsapp" target="_blank">💬</a>
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/573000000000" class="whatsapp" target="_blank">
+    💬
+  </a>
 
   <!-- JS -->
   <script src="js/main.js"></script>
