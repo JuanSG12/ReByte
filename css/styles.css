@@ -300,14 +300,10 @@ section,
   transition: opacity 0.3s ease;
 }
 
-.whatsapp-float:hover .wa-tooltip {
-  opacity: 1;
-}
-.site-footer {
-  text-align: center;
-  padding: 30px 15px;
-  font-size: 0.85rem;
-  opacity: 0.7;
-  position: relative;
-  z-index: 2;
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;          /* 🔑 por encima de TODO */
+  pointer-events: auto;  /* 🔑 permite click */
 }
