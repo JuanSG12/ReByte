@@ -1,193 +1,152 @@
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-/* ===== FONDO ESTRELLAS ===== */
-body {
-  background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000 100%);
-  color: white;
-  overflow-x: hidden;
+html, body {
+  background: #000;
+  color: #fff;
 }
 
-body::before {
-  content: "";
+#stars {
   position: fixed;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 20px 30px, #ffffffaa, transparent),
-    radial-gradient(1px 1px at 80px 120px, #ffffff88, transparent),
-    radial-gradient(1px 1px at 150px 200px, #ffffff66, transparent);
-  background-size: 200px 200px;
-  animation: starsMove 60s linear infinite;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
 }
 
-@keyframes starsMove {
-  from { transform: translateY(0); }
-  to { transform: translateY(-2000px); }
-}
-
-/* ===== HEADER ===== */
 .header {
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(10px);
-  background: rgba(0,0,0,0.5);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  z-index: 1000;
+  padding: 20px 40px;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.logo img {
+  height: 90px;
 }
 
-.logo {
-  height: 80px;
-}
-
-.slogan {
+.logo span {
+  display: block;
   font-size: 14px;
   opacity: 0.8;
 }
 
-.nav ul {
-  display: flex;
+.menu {
   list-style: none;
+  display: flex;
   gap: 25px;
 }
 
-.nav a {
+.menu a, .menu span {
   color: white;
   text-decoration: none;
   cursor: pointer;
 }
 
-/* ===== MENU DESPLEGABLE ===== */
 .nav-item {
   position: relative;
 }
 
 .dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: rgba(20,20,30,0.95);
-  border-radius: 10px;
-  min-width: 180px;
   display: none;
+  position: absolute;
+  top: 30px;
+  background: #111;
+  border-radius: 8px;
+  padding: 10px;
 }
 
-.nav-item:hover .dropdown {
+.dropdown.open {
   display: block;
 }
 
-.dropdown a {
-  display: block;
-  padding: 12px 18px;
+.dropdown li {
+  margin: 10px 0;
 }
 
-.dropdown a:hover {
-  background: rgba(255,255,255,0.1);
+.urgent {
+  background: #00b4ff;
+  padding: 8px 14px;
+  border-radius: 20px;
 }
 
-/* ===== HERO ===== */
 .hero {
   text-align: center;
   padding: 120px 20px;
 }
 
-/* ===== PLANES ===== */
 .planes {
   padding: 80px 40px;
+}
+
+.cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  padding: 30px;
+  width: 280px;
+  border-radius: 20px;
   text-align: center;
 }
 
-.planes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.plan-card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
-  padding: 30px;
-  transition: transform .3s;
-}
-
-.plan-card:hover {
-  transform: translateY(-10px);
-}
-
-.precio {
-  font-size: 28px;
-  margin: 15px 0;
-}
-
-.plan-card ul {
+.card ul {
   list-style: none;
   margin: 20px 0;
 }
 
-.plan-card li {
-  margin-bottom: 10px;
+.card li {
+  margin: 10px 0;
 }
 
-.plan-card button {
-  background: white;
-  color: black;
+.price {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.card button {
+  background: #00b4ff;
   border: none;
-  padding: 12px 20px;
-  border-radius: 30px;
+  padding: 12px;
+  border-radius: 25px;
   cursor: pointer;
 }
 
-/* ===== CONTACTO ===== */
 .contacto {
   padding: 80px 40px;
   text-align: center;
 }
 
-.contact-form {
+.contacto form {
   max-width: 400px;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
 }
 
-.contact-form input,
-.contact-form textarea {
+.contacto input, .contacto textarea {
+  width: 100%;
+  margin: 10px 0;
   padding: 12px;
   border-radius: 8px;
   border: none;
 }
 
-.contact-form button {
-  padding: 12px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-}
-
-/* ===== WHATSAPP ===== */
 .whatsapp {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
-  font-size: 30px;
-  background: #25d366;
-  color: white;
-  padding: 14px;
+  right: 20px;
+  bottom: 20px;
+  background: #25D366;
+  padding: 15px;
   border-radius: 50%;
+  font-size: 24px;
+  color: white;
   text-decoration: none;
 }

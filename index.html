@@ -2,105 +2,96 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ReByte</title>
+  <title>ReByte | Soporte Técnico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-left">
-      <img src="assets/img/logo.png" alt="ReByte Logo" class="logo" />
-      <span class="slogan">Tecnología que responde</span>
-    </div>
+<canvas id="stars"></canvas>
 
-    <nav class="nav">
+<header class="header">
+  <div class="logo">
+    <img src="assets/img/logo.png" alt="ReByte">
+    <span>Cuidamos lo que te conecta</span>
+  </div>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="#inicio">Inicio</a></li>
+
+      <li class="nav-item">
+        <span>Servicios ▾</span>
+        <ul class="dropdown">
+          <li><a href="#planes">Planes</a></li>
+          <li><a href="#contacto">Soporte</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a class="urgent" href="#contacto">Soporte urgente</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="inicio" class="hero">
+  <h1>Soporte técnico confiable</h1>
+  <p>Computadores y portátiles — hogares y empresas</p>
+</section>
+
+<section id="planes" class="planes">
+  <h2>Planes</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Básico</h3>
+      <p class="price">$40.000</p>
       <ul>
-        <li><a href="#inicio">Inicio</a></li>
-
-        <li class="nav-item">
-          <a>Servicios ▾</a>
-          <div class="dropdown">
-            <a href="#servicios">Servicios</a>
-            <a href="#soporte">Soporte urgente</a>
-          </div>
-        </li>
-
-        <li><a href="#contacto">Contacto</a></li>
+        <li>Chequeo anual</li>
+        <li>Soporte remoto 72h</li>
+        <li>Descuento en repuestos</li>
       </ul>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero" id="inicio">
-    <h1>Soluciones tecnológicas claras</h1>
-    <p>Soporte, mantenimiento y acompañamiento profesional</p>
-  </section>
-
-  <!-- PLANES -->
-  <section class="planes" id="servicios">
-    <h2>Planes</h2>
-
-    <div class="planes-grid">
-
-      <div class="plan-card">
-        <h3>Básico</h3>
-        <p class="precio">$40.000</p>
-        <ul>
-          <li>Chequeo anual</li>
-          <li>Soporte remoto 72h</li>
-          <li>Descuento en repuestos</li>
-        </ul>
-        <button>Elegir</button>
-      </div>
-
-      <div class="plan-card destacado">
-        <h3>Profesional</h3>
-        <p class="precio">$75.000</p>
-        <ul>
-          <li>Mantenimiento semestral</li>
-          <li>Soporte remoto 24h</li>
-          <li>1 visita in situ</li>
-        </ul>
-        <button>Elegir</button>
-      </div>
-
-      <div class="plan-card">
-        <h3>Corporativo</h3>
-        <p class="precio">$140.000</p>
-        <ul>
-          <li>Soporte ilimitado</li>
-          <li>Prioridad 24/7</li>
-          <li>Contrato y SLA</li>
-        </ul>
-        <button>Elegir</button>
-      </div>
-
+      <button>Elegir</button>
     </div>
-  </section>
 
-  <!-- CONTACTO -->
-  <section class="contacto" id="contacto">
-    <h2>Contáctanos</h2>
+    <div class="card highlight">
+      <h3>Profesional</h3>
+      <p class="price">$75.000</p>
+      <ul>
+        <li>Mantenimiento semestral</li>
+        <li>Soporte remoto 24h</li>
+        <li>1 visita in situ</li>
+      </ul>
+      <button>Elegir</button>
+    </div>
 
-    <form class="contact-form">
-      <input type="text" placeholder="Nombre" required />
-      <input type="email" placeholder="Correo" required />
-      <textarea placeholder="Mensaje"></textarea>
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
+    <div class="card">
+      <h3>Corporativo</h3>
+      <p class="price">$140.000</p>
+      <ul>
+        <li>Soporte ilimitado</li>
+        <li>Prioridad 24/7</li>
+        <li>Contrato y SLA</li>
+      </ul>
+      <button>Elegir</button>
+    </div>
+  </div>
+</section>
 
-  <!-- WHATSAPP -->
-  <a href="https://wa.me/573000000000" class="whatsapp" target="_blank">
-    💬
-  </a>
+<section id="contacto" class="contacto">
+  <h2>Contacto</h2>
 
-  <!-- JS -->
-  <script src="js/main.js"></script>
+  <form>
+    <input type="text" placeholder="Nombre" required>
+    <input type="email" placeholder="Correo" required>
+    <textarea placeholder="Mensaje"></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+</section>
+
+<a class="whatsapp" href="https://wa.me/573000000000" target="_blank">💬</a>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>

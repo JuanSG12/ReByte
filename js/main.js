@@ -1,6 +1,3 @@
-/***********************************
- * MENU DESPLEGABLE - SERVICIOS
- ***********************************/
 document.addEventListener("DOMContentLoaded", () => {
   const navItem = document.querySelector(".nav-item");
   const dropdown = document.querySelector(".dropdown");
@@ -15,83 +12,44 @@ document.addEventListener("DOMContentLoaded", () => {
       dropdown.classList.remove("open");
     });
   }
-});
 
-/***********************************
- * FONDO DE ESTRELLAS ANIMADAS
- ***********************************/
-const canvas = document.getElementById("stars");
-if (canvas) {
+  const canvas = document.getElementById("stars");
+  if (!canvas) return;
+
   const ctx = canvas.getContext("2d");
 
-  function resizeCanvas() {
+  function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
-
-  resizeCanvas();
-  window.addEventListener("resize", resizeCanvas);
+  resize();
+  window.addEventListener("resize", resize);
 
   let stars = [];
-  const STAR_COUNT = 150;
-  const mouse = { x: null, y: null };
+  for (let i = 0; i < 150; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.5,
+      dx: (Math.random() - 0.5) * 0.3,
+      dy: (Math.random() - 0.5) * 0.3
+    });
+  }
 
-  window.addEventListener("mousemove", (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.x += s.dx;
+      s.y += s.dy;
+      if (s.x < 0 || s.x > canvas.width) s.x = Math.random() * canvas.width;
+      if (s.y < 0 || s.y > canvas.height) s.y = Math.random() * canvas.height;
 
-  class Star {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.radius = Math.random() * 1.5 + 0.5;
-      this.speedX = (Math.random() - 0.5) * 0.3;
-      this.speedY = (Math.random() - 0.5) * 0.3;
-    }
-
-    draw() {
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fillStyle = "white";
       ctx.fill();
-    }
-
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-
-      if (mouse.x && mouse.y) {
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
-          this.x += dx / dist;
-          this.y += dy / dist;
-        }
-      }
-
-      if (this.x < 0 || this.x > canvas.width) this.x = Math.random() * canvas.width;
-      if (this.y < 0 || this.y > canvas.height) this.y = Math.random() * canvas.height;
-    }
-  }
-
-  function initStars() {
-    stars = [];
-    for (let i = 0; i < STAR_COUNT; i++) {
-      stars.push(new Star());
-    }
-  }
-
-  function animateStars() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    stars.forEach(star => {
-      star.update();
-      star.draw();
     });
-    requestAnimationFrame(animateStars);
+    requestAnimationFrame(animate);
   }
-
-  initStars();
-  animateStars();
-}
+  animate();
+});
