@@ -9,27 +9,32 @@
 
 <body>
 
+<!-- FONDO ESTRELLAS -->
+<canvas id="stars"></canvas>
+
 <!-- NAVBAR -->
-<nav class="navbar">
+<header class="navbar">
     <div class="nav-left">
-        <img src="assets/img/logo.png" alt="ReByte Logo" class="logo">
+        <img src="assets/img/logo.png" class="logo" alt="ReByte">
     </div>
 
-    <ul class="nav-menu">
-        <li><a href="#inicio">Inicio</a></li>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="#inicio">Inicio</a></li>
 
-        <li class="dropdown">
-            <a href="#">Servicios ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="#servicios">Soporte Técnico</a></li>
-                <li><a href="#planes">Planes</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </li>
+            <li class="dropdown">
+                <button class="dropbtn">Servicios ▾</button>
+                <ul class="dropdown-menu">
+                    <li><a href="#servicios">Soporte Técnico</a></li>
+                    <li><a href="#planes">Planes</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </li>
 
-        <li><a href="#contacto" class="btn-nav">Soporte Urgente</a></li>
-    </ul>
-</nav>
+            <li><a href="#contacto" class="btn-nav">Soporte urgente</a></li>
+        </ul>
+    </nav>
+</header>
 
 <!-- HERO -->
 <section id="inicio" class="hero">
@@ -43,78 +48,60 @@
     <h2>Servicios</h2>
 
     <div class="service-grid">
-        <div class="service-card">
-            <h3>Soporte Remoto</h3>
-            <p>Asistencia inmediata sin salir de casa.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>Mantenimiento</h3>
-            <p>Optimización, limpieza y rendimiento.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>Soporte Empresarial</h3>
-            <p>Soluciones continuas con SLA.</p>
-        </div>
+        <div class="service-card">Soporte remoto inmediato</div>
+        <div class="service-card">Mantenimiento y optimización</div>
+        <div class="service-card">Soporte empresarial</div>
     </div>
 </section>
 
 <!-- PLANES -->
 <section id="planes" class="pricing">
     <h2>Planes</h2>
-    <p class="subtitle">Planes claros, sin letra pequeña</p>
 
-    <div class="pricing-container">
-
+    <div class="pricing-grid">
         <div class="plan-card">
             <h3>Básico</h3>
-            <p class="price">$40.000</p>
-            <ul>
-                <li>Chequeo anual</li>
-                <li>Soporte remoto 72h</li>
-                <li>Descuento en repuestos</li>
-            </ul>
+            <span>$40.000</span>
+            <p>Chequeo anual</p>
+            <p>Soporte remoto 72h</p>
+            <p>Descuento en repuestos</p>
             <a href="#contacto" class="btn-primary">ELEGIR</a>
         </div>
 
         <div class="plan-card featured">
             <h3>Profesional</h3>
-            <p class="price">$75.000</p>
-            <ul>
-                <li>Mantenimiento semestral</li>
-                <li>Soporte remoto 24h</li>
-                <li>1 visita in situ</li>
-            </ul>
+            <span>$75.000</span>
+            <p>Mantenimiento semestral</p>
+            <p>Soporte remoto 24h</p>
+            <p>1 visita in situ</p>
             <a href="#contacto" class="btn-primary">ELEGIR</a>
         </div>
 
         <div class="plan-card">
             <h3>Corporativo</h3>
-            <p class="price">$140.000</p>
-            <ul>
-                <li>Soporte ilimitado</li>
-                <li>Prioridad 24/7</li>
-                <li>Contrato y SLA</li>
-            </ul>
+            <span>$140.000</span>
+            <p>Soporte ilimitado</p>
+            <p>Prioridad 24/7</p>
+            <p>Contrato y SLA</p>
             <a href="#contacto" class="btn-primary">ELEGIR</a>
         </div>
-
     </div>
 </section>
 
 <!-- CONTACTO -->
 <section id="contacto" class="contact">
     <h2>Contacto</h2>
-    <p>¿Necesitas ayuda inmediata?</p>
-    <a href="https://wa.me/573000000000" target="_blank" class="btn-primary">
-        Contactar por WhatsApp
-    </a>
+
+    <form class="contact-form">
+        <input type="text" placeholder="Nombre" required>
+        <input type="email" placeholder="Correo" required>
+        <textarea placeholder="Mensaje"></textarea>
+        <button type="submit">Enviar</button>
+    </form>
 </section>
 
-<footer>
-    © 2026 ReByte — Soporte Técnico Premium
-</footer>
+<!-- WHATSAPP -->
+<a href="https://wa.me/573000000000" class="whatsapp" target="_blank">💬</a>
 
 <script src="assets/js/main.js"></script>
 </body>
