@@ -1,100 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>ReByte | Cuidamos lo que te conecta</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>ReByte | Soporte Técnico</title>
+
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* CANVAS */
+    #stars {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      height: 72px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a, nav button {
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      border: none;
+      padding: 12px 22px;
+      border-radius: 12px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    nav a:hover, nav button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 25px #38bdf8;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      opacity: 0.9;
+    }
+  </style>
 </head>
-<link rel="stylesheet" href="css/styles.css">
-<script src="js/main.js"></script>
+
 <body>
 
-<canvas id="stars"></canvas>
+  <!-- FONDO -->
+  <canvas id="stars"></canvas>
 
-<header>
-  <div class="logo-container">
-    <img src="assets/img/logo.png" alt="ReByte" class="logo">
-  </div>
+  <!-- HEADER -->
+  <header>
+    <img src="assets/img/logo.png" class="logo" alt="ReByte logo">
+    <nav>
+      <a href="#">Inicio</a>
+      <button>Servicios</button>
+      <a href="#">Soporte urgente</a>
+    </nav>
+  </header>
 
-  <nav>
-    <ul class="nav-list">
-      <li><a href="#inicio">Inicio</a></li>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>ReByte</h1>
+    <p>Cuidamos lo que te conecta. Soporte técnico premium para computadores y portátiles.</p>
+  </section>
 
-      <li class="dropdown">
-        <a href="#">Servicios ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Soporte urgente</a></li>
-          <li><a href="#">Mantenimiento</a></li>
-          <li><a href="#">Consultoría IT</a></li>
-        </ul>
-      </li>
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
 
-      <li><a href="#planes">Planes</a></li>
-      <li><a href="#contacto" class="btn-primary">Contacto</a></li>
-    </ul>
-  </nav>
-</header>
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-<section id="inicio" class="hero">
-  <h1>ReByte</h1>
-  <p>Cuidamos lo que te conecta</p>
-</section>
+    let stars = [];
+    const STAR_COUNT = 150;
 
-<section id="planes" class="plans">
-  <h2>Planes claros, sin letra pequeña</h2>
+    class Star {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.r = Math.random() * 1.5 + 0.5;
+        this.dx = (Math.random() - 0.5) * 0.3;
+        this.dy = (Math.random() - 0.5) * 0.3;
+      }
 
-  <div class="plan-grid">
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+      }
 
-    <div class="plan-card">
-      <h3>Básico</h3>
-      <span class="price">$40.000</span>
-      <ul>
-        <li>Chequeo anual</li>
-        <li>Soporte remoto 72h</li>
-        <li>Descuento en repuestos</li>
-      </ul>
-      <a href="#contacto" class="btn-plan">Elegir</a>
-    </div>
+      update() {
+        this.x += this.dx;
+        this.y += this.dy;
 
-    <div class="plan-card highlight">
-      <h3>Profesional</h3>
-      <span class="price">$75.000</span>
-      <ul>
-        <li>Mantenimiento semestral</li>
-        <li>Soporte remoto 24h</li>
-        <li>1 visita in situ</li>
-      </ul>
-      <a href="#contacto" class="btn-plan">Elegir</a>
-    </div>
+        if (this.x < 0 || this.x > canvas.width) this.x = Math.random() * canvas.width;
+        if (this.y < 0 || this.y > canvas.height) this.y = Math.random() * canvas.height;
+      }
+    }
 
-    <div class="plan-card">
-      <h3>Corporativo</h3>
-      <span class="price">$140.000</span>
-      <ul>
-        <li>Soporte ilimitado</li>
-        <li>Prioridad 24/7</li>
-        <li>Contrato y SLA</li>
-      </ul>
-      <a href="#contacto" class="btn-plan">Elegir</a>
-    </div>
+    function init() {
+      stars = [];
+      for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
+    }
 
-  </div>
-</section>
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => { s.update(); s.draw(); });
+      requestAnimationFrame(animate);
+    }
 
-<section id="contacto" class="contact">
-  <h2>Contáctanos</h2>
+    init();
+    animate();
+  </script>
 
-  <form class="contact-form">
-    <input type="text" placeholder="Nombre" required>
-    <input type="email" placeholder="Correo" required>
-    <textarea placeholder="Cuéntanos tu problema"></textarea>
-    <button type="submit">Enviar</button>
-  </form>
-</section>
-
-<a href="https://wa.me/573000000000" class="whatsapp" target="_blank">💬</a>
-
-<script src="js/main.js"></script>
 </body>
 </html>
- 
