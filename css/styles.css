@@ -64,8 +64,8 @@ header {
 }
 
 /* Dropdown */
-.dropdown {
-  position: relative;
+.dropdown-content.show {
+  display: block;
 }
 
 .dropdown-content {
@@ -90,7 +90,7 @@ header {
 
 /* HERO */
 .hero {
-  min-height: 100vh;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,7 +109,7 @@ header {
 
 /* PLANES */
 .planes {
-  padding: 100px 40px;
+  padding: 70px 40px;
   text-align: center;
 }
 
@@ -122,7 +122,7 @@ header {
 
 .plan-card {
   background: rgba(15,23,42,.85);
-  padding: 30px;
+  padding: 22px;
   width: 280px;
   border-radius: 22px;
   transition: all .3s ease;
@@ -212,3 +212,9 @@ section,
   position: relative;
   z-index: 1;
 }
+.logo {
+  height: 140px;
+  width: auto;
+  filter: drop-shadow(0 0 12px rgba(56,189,248,.5));
+}
+

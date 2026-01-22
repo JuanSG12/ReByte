@@ -59,3 +59,17 @@ function animate() {
 
 init();
 animate();
+
+// Dropdown persistente
+const dropBtn = document.querySelector(".dropbtn");
+const dropdown = document.querySelector(".dropdown-content");
+
+dropBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  dropdown.classList.toggle("show");
+});
+
+document.addEventListener("click", () => {
+  dropdown.classList.remove("show");
+});
+
