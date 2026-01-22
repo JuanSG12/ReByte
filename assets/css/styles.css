@@ -33,13 +33,22 @@ body {
 }
 
 .logo {
-  height: 42px;
+  height: 72px;
   width: auto;
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 header {
-  background: #0f172a;
+  height: auto;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
 }
 
