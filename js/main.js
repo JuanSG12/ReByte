@@ -124,3 +124,29 @@ function closePlan() {
   document.getElementById("planModal").style.display = "none";
 }
 
+// ================= FORMULARIO =================
+const form = document.getElementById("contactForm");
+const respuesta = document.getElementById("formRespuesta");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  respuesta.innerHTML = "⏳ Enviando...";
+
+  const formData = new FormData(form);
+
+  const res = await fetch("https://script.google.com/macros/s/AKfycbxzbiMcjN7j3AKyyrtMe8iC9Gje2bTRaYXskFLSmZWYFSQpi1_MZzxeZ43lqZ0Y3pNp/exec", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+
+  respuesta.innerHTML = `
+    ✅ Gracias por contactarnos.<br>
+    Tu número de guía es:<br>
+    <strong>${data.guia}</strong>
+  `;
+
+  form.reset();
+});
