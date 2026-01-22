@@ -33,7 +33,13 @@ body {
 }
 
 .logo {
-    height: 45px;
+  height: 40px;
+  width: auto;
+  display: block;
+}
+header {
+  background: #0f172a;
+
 }
 
 /* MENU */
