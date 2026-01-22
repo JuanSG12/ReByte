@@ -86,7 +86,7 @@ const plans = {
     features: [
       "Mantenimiento semestral",
       "Soporte remoto 24h",
-      "1 visita in situ"
+      "1 visita in sitio"
     ]
   },
   "Corporativo": {
@@ -115,7 +115,7 @@ function openPlan(planName) {
 
   const whatsappMsg = `Hola, quiero contratar el plan ${planName} de ReByte`;
   document.getElementById("planWhatsapp").href =
-    `https://wa.me/573001234567?text=${encodeURIComponent(whatsappMsg)}`;
+    `https://wa.me/573125710763?text=${encodeURIComponent(whatsappMsg)}`;
 
   modal.style.display = "flex";
 }
