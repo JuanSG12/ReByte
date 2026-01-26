@@ -180,50 +180,33 @@ async function buscarGuia() {
       return;
     }
 
-resultado.innerHTML = `
-  <div class="plan-card destacado" style="margin:auto;max-width:320px;">
-    <h3>🔧 Estado del mantenimiento</h3>
-    <p><strong>Guía:</strong> ${guia}</p>
-    <p><strong>Estado:</strong> ${data.estado}</p>
-    <p>${data.comentario || ""}</p>
+    resultado.innerHTML = `
+      <div class="plan-card destacado" style="margin:auto;max-width:320px;">
+        <h3>🔧 Estado del mantenimiento</h3>
+        <p><strong>Guía:</strong> ${guia}</p>
+        <p><strong>Estado:</strong> ${data.estado}</p>
+        <p>${data.comentario || ""}</p>
 
-    ${
-      data.foto
-        ? `<img 
-            src="${convertDriveLink(data.foto)}" 
-            style="width:100%;border-radius:14px;margin:12px 0;"
-          >`
-        : ""
-    }
+        ${
+          data.foto
+            ? `<img 
+                src="${convertDriveLink(data.foto)}" 
+                style="width:100%;border-radius:14px;margin:12px 0;"
+              >`
+            : ""
+        }
 
-    <button class="btn" onclick="location.reload()">Cerrar</button>
-  </div>
-`;
+        <button class="btn" onclick="location.reload()">Cerrar</button>
+      </div>
+    `;
 
-// ================= UTILIDADES =================
-
-function convertDriveLink(url) {
-  if (!url) return "";
-
-  if (url.includes("drive.google.com")) {
-    const match = url.match(/\/d\/([^\/]+)/);
-    if (match && match[1]) {
-      return `https://drive.google.com/uc?export=view&id=${match[1]}`;
-    }
+  } catch (err) {
+    console.error(err);
+    resultado.innerHTML = "❌ Error consultando guía.";
   }
-
-  return url;
 }
-
-function closeConfirm() {
-  document.getElementById("confirmModal").style.display = "none";
-}
-
 function copiarGuia() {
   const guia = document.getElementById("guiaGenerada").innerText;
   navigator.clipboard.writeText(guia);
   alert("✅ Guía copiada al portapapeles");
-};
-
-
-
+}
