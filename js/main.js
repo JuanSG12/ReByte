@@ -126,14 +126,35 @@ function closePlan() {
 }
 // ===== CONFIRMACION FORMULARIO =====
 const form = document.getElementById("contactForm");
-const respuesta = document.getElementById("formRespuesta");
 
-form.addEventListener("submit", () => {
-  respuesta.innerHTML = `
-    ✅ Mensaje enviado correctamente.<br>
-    En breve nos comunicaremos contigo.
-  `;
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  try {
+    const res = await fetch(
+      "https://script.google.com/macros/s/AKfycbxzbiMcjN7j3AKyyrtMe8iC9Gje2bTRaYXskFLSmZWYFSQpi1_MZzxeZ43lqZ0Y3pNp/exec",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const data = await res.json();
+
+    // 👉 Mostrar modal con guía
+    document.getElementById("guiaGenerada").innerText = data.guia;
+    document.getElementById("confirmModal").style.display = "flex";
+
+    form.reset();
+
+  } catch (err) {
+    alert("❌ Error enviando formulario");
+    console.error(err);
+  }
 });
+
 // ================= BUSCADOR DE GUIA =================
 
 async function buscarGuia() {
@@ -159,22 +180,46 @@ async function buscarGuia() {
       return;
     }
 
-    resultado.innerHTML = `
-      <div class="plan-card">
-        <h3>Estado: ${data.estado}</h3>
-        <p>${data.comentario || ""}</p>
-        ${
-          data.foto
-            ? `<img src="${data.foto}" style="width:100%;border-radius:12px;margin-top:10px;">`
-            : ""
-        }
-      </div>
-    `;
+resultado.innerHTML = `
+  <div class="plan-card destacado" style="margin:auto;max-width:320px;">
+    <h3>🔧 Estado del mantenimiento</h3>
+    <p><strong>Guía:</strong> ${guia}</p>
+    <p><strong>Estado:</strong> ${data.estado}</p>
+    <p>${data.comentario || ""}</p>
 
-  } catch (err) {
-    console.error(err);
-    resultado.innerHTML = "❌ Error consultando guía.";
+    ${
+      data.foto
+        ? `<img 
+            src="${convertDriveLink(data.foto)}" 
+            style="width:100%;border-radius:14px;margin:12px 0;"
+          >`
+        : ""
+    }
+
+    <button class="btn" onclick="location.reload()">Cerrar</button>
+  </div>
+`;
+function convertDriveLink(url) {
+  if (!url) return "";
+
+  if (url.includes("drive.google.com")) {
+    const match = url.match(/\/d\/([^\/]+)/);
+    if (match && match[1]) {
+      return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+    }
   }
+
+  return url;
 }
+function closeConfirm() {
+  document.getElementById("confirmModal").style.display = "none";
+}
+
+function copiarGuia() {
+  const guia = document.getElementById("guiaGenerada").innerText;
+  navigator.clipboard.writeText(guia);
+  alert("✅ Guía copiada al portapapeles");
+}
+
 
 

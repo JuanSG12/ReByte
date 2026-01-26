@@ -24,6 +24,19 @@
     </a>
   </div>
 </div>
+<!-- MODAL CONFIRMACION -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeConfirm()">&times;</span>
+
+    <h2>✅ Solicitud recibida</h2>
+    <p>Guarda tu número de guía:</p>
+
+    <h3 id="guiaGenerada" style="margin:15px 0;color:#38bdf8;"></h3>
+
+    <button class="btn" onclick="copiarGuia()">📋 Copiar guía</button>
+  </div>
+</div>
 <body>
 
   <!-- Fondo estrellas -->
