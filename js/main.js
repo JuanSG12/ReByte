@@ -148,7 +148,7 @@ async function buscarGuia() {
 
   try {
     const res = await fetch(
-      "https://script.google.com/macros/s/AKfycbxzbiMcjN7j3AKyyrtMe8iC9Gje2bTRaYXskFLSmZWYFSQpi1_MZzxeZ43lqZ0Y3pNp/exec" + guia
+      "https://script.google.com/macros/s/AKfycbznFZ5IXGr4qx4X-y6pjgLM0OGYSg2jkeQJlRvLf9Nww3wWNXOTwsejCGO0tAHYBpuh-A/exec" + guia
     );
 
     const data = await res.json();
