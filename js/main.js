@@ -223,7 +223,7 @@ function copiarGuia() {
   const guia = document.getElementById("guiaGenerada").innerText;
   navigator.clipboard.writeText(guia);
   alert("✅ Guía copiada al portapapeles");
-}
+};
 
 
 
