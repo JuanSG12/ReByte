@@ -133,7 +133,7 @@ form.addEventListener("submit", () => {
     En breve nos comunicaremos contigo.
   `;
 });
-// ================= BUSCADOR DE GUIA (SIN CORS) =================
+// ================= BUSCADOR DE GUIA (SIN FETCH - SIN CORS) =================
 
 function buscarGuia() {
   const guia = document.getElementById("guiaInput").value.trim();
@@ -147,13 +147,14 @@ function buscarGuia() {
 
   resultado.innerHTML = "🔎 Buscando...";
 
-  const url = "https://script.google.com/macros/s/AKfycbznFZ5IXGr4qx4X-y6pjgLM0OGYSg2jkeQJlRvLf9Nww3wWNXOTwsejCGO0tAHYBpuh-A/exec?guia=" 
-              + encodeURIComponent(guia);
+  const url = 
+    "https://script.google.com/macros/s/AKfycbznFZ5IXGr4qx4X-y6pjgLM0OGYSg2jkeQJlRvLf9Nww3wWNXOTwsejCGO0tAHYBpuh-A/exec" +
+    "?guia=" + encodeURIComponent(guia);
 
-  frame.onload = () => {
+  frame.onload = function () {
     try {
-      const text = frame.contentDocument.body.innerText;
-      const data = JSON.parse(text);
+      const raw = frame.contentDocument.body.innerText;
+      const data = JSON.parse(raw);
 
       if (!data.encontrado) {
         resultado.innerHTML = "❌ Guía no encontrada.";
@@ -172,7 +173,7 @@ function buscarGuia() {
         </div>
       `;
     } catch (err) {
-      console.error(err);
+      console.error("Error parseando respuesta:", err);
       resultado.innerHTML = "❌ Error leyendo datos.";
     }
   };
