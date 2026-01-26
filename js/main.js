@@ -127,31 +127,10 @@ function closePlan() {
 // ===== CONFIRMACION FORMULARIO =====
 const form = document.getElementById("contactForm");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-
-  try {
-const res = await fetch(proxyUrl, {
-  method: "POST",
-  body: formData
-});
-
-
-
-    const data = await res.json();
-
-    // 👉 Mostrar modal con guía
-    document.getElementById("guiaGenerada").innerText = data.guia;
+form.addEventListener("submit", () => {
+  setTimeout(() => {
     document.getElementById("confirmModal").style.display = "flex";
-
-    form.reset();
-
-  } catch (err) {
-    alert("❌ Error enviando formulario");
-    console.error(err);
-  }
+  }, 1200);
 });
 
 // ================= BUSCADOR DE GUIA =================
