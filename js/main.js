@@ -133,11 +133,12 @@ form.addEventListener("submit", () => {
     En breve nos comunicaremos contigo.
   `;
 });
-// ================= BUSCADOR DE GUIA =================
+// ================= BUSCADOR DE GUIA (SIN CORS) =================
 
-async function buscarGuia() {
+function buscarGuia() {
   const guia = document.getElementById("guiaInput").value.trim();
   const resultado = document.getElementById("resultadoGuia");
+  const frame = document.getElementById("apiFrame");
 
   if (!guia) {
     resultado.innerHTML = "⚠️ Ingresa una guía.";
@@ -146,33 +147,37 @@ async function buscarGuia() {
 
   resultado.innerHTML = "🔎 Buscando...";
 
-  try {
-    const res = await fetch(
-      "https://script.google.com/macros/s/AKfycbznFZ5IXGr4qx4X-y6pjgLM0OGYSg2jkeQJlRvLf9Nww3wWNXOTwsejCGO0tAHYBpuh-A/exec" + guia
-    );
+  const url = "https://script.google.com/macros/s/AKfycbznFZ5IXGr4qx4X-y6pjgLM0OGYSg2jkeQJlRvLf9Nww3wWNXOTwsejCGO0tAHYBpuh-A/exec?guia=" 
+              + encodeURIComponent(guia);
 
-    const data = await res.json();
+  frame.onload = () => {
+    try {
+      const text = frame.contentDocument.body.innerText;
+      const data = JSON.parse(text);
 
-    if (!data.encontrado) {
-      resultado.innerHTML = "❌ Guía no encontrada.";
-      return;
+      if (!data.encontrado) {
+        resultado.innerHTML = "❌ Guía no encontrada.";
+        return;
+      }
+
+      resultado.innerHTML = `
+        <div class="plan-card">
+          <h3>Estado: ${data.estado}</h3>
+          <p>${data.comentario || ""}</p>
+          ${
+            data.foto
+              ? `<img src="${data.foto}" style="width:100%;border-radius:12px;margin-top:10px;">`
+              : ""
+          }
+        </div>
+      `;
+    } catch (err) {
+      console.error(err);
+      resultado.innerHTML = "❌ Error leyendo datos.";
     }
+  };
 
-    resultado.innerHTML = `
-      <div class="plan-card">
-        <h3>Estado: ${data.estado}</h3>
-        <p>${data.comentario || ""}</p>
-        ${
-          data.foto
-            ? `<img src="${data.foto}" style="width:100%;border-radius:12px;margin-top:10px;">`
-            : ""
-        }
-      </div>
-    `;
-
-  } catch (err) {
-    console.error(err);
-    resultado.innerHTML = "❌ Error consultando guía.";
-  }
+  frame.src = url;
 }
+
 
