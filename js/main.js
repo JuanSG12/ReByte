@@ -199,6 +199,9 @@ resultado.innerHTML = `
     <button class="btn" onclick="location.reload()">Cerrar</button>
   </div>
 `;
+
+// ================= UTILIDADES =================
+
 function convertDriveLink(url) {
   if (!url) return "";
 
@@ -211,6 +214,7 @@ function convertDriveLink(url) {
 
   return url;
 }
+
 function closeConfirm() {
   document.getElementById("confirmModal").style.display = "none";
 }
