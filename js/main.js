@@ -133,12 +133,11 @@ form.addEventListener("submit", () => {
     En breve nos comunicaremos contigo.
   `;
 });
-// ================= BUSCADOR DE GUIA (SIN FETCH - SIN CORS) =================
+// ================= BUSCADOR DE GUIA (CON PROXY) =================
 
-function buscarGuia() {
+async function buscarGuia() {
   const guia = document.getElementById("guiaInput").value.trim();
   const resultado = document.getElementById("resultadoGuia");
-  const frame = document.getElementById("apiFrame");
 
   if (!guia) {
     resultado.innerHTML = "⚠️ Ingresa una guía.";
@@ -147,38 +146,33 @@ function buscarGuia() {
 
   resultado.innerHTML = "🔎 Buscando...";
 
-  const url = 
-    "https://script.google.com/macros/s/AKfycbznFZ5IXGr4qx4X-y6pjgLM0OGYSg2jkeQJlRvLf9Nww3wWNXOTwsejCGO0tAHYBpuh-A/exec" +
-    "?guia=" + encodeURIComponent(guia);
+  try {
+    const res = await fetch(
+      "https://rebyte-proxy.re-byte19.workers.dev/" + encodeURIComponent(guia)
+    );
 
-  frame.onload = function () {
-    try {
-      const raw = frame.contentDocument.body.innerText;
-      const data = JSON.parse(raw);
+    const data = await res.json();
 
-      if (!data.encontrado) {
-        resultado.innerHTML = "❌ Guía no encontrada.";
-        return;
-      }
-
-      resultado.innerHTML = `
-        <div class="plan-card">
-          <h3>Estado: ${data.estado}</h3>
-          <p>${data.comentario || ""}</p>
-          ${
-            data.foto
-              ? `<img src="${data.foto}" style="width:100%;border-radius:12px;margin-top:10px;">`
-              : ""
-          }
-        </div>
-      `;
-    } catch (err) {
-      console.error("Error parseando respuesta:", err);
-      resultado.innerHTML = "❌ Error leyendo datos.";
+    if (!data.encontrado) {
+      resultado.innerHTML = "❌ Guía no encontrada.";
+      return;
     }
-  };
 
-  frame.src = url;
+    resultado.innerHTML = `
+      <div class="plan-card">
+        <h3>Estado: ${data.estado}</h3>
+        <p>${data.comentario || ""}</p>
+        ${
+          data.foto
+            ? `<img src="${data.foto}" style="width:100%;border-radius:12px;margin-top:10px;">`
+            : ""
+        }
+      </div>
+    `;
+  } catch (err) {
+    console.error(err);
+    resultado.innerHTML = "❌ Error consultando guía.";
+  }
 }
 
 
