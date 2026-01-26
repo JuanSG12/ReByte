@@ -133,13 +133,11 @@ form.addEventListener("submit", async (e) => {
   const formData = new FormData(form);
 
   try {
-const res = await fetch(
-  "https://script.google.com/macros/s/AKfycbzrvmO2bQUXWSl6nrnaFrDhIBI06cMwW_UceYq3U0QqjHVqh2IMPzeEzlF4TuCtxEN8mw/exec",
-  {
-    method: "POST",
-    body: formData
-  }
-);
+const res = await fetch(proxyUrl, {
+  method: "POST",
+  body: formData
+});
+
 
 
     const data = await res.json();
