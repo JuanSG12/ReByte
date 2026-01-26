@@ -1,3 +1,4 @@
+const proxyUrl = "https://rebyte-proxy.re-byte19.workers.dev";
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 
@@ -133,7 +134,7 @@ form.addEventListener("submit", () => {
     En breve nos comunicaremos contigo.
   `;
 });
-// ================= BUSCADOR DE GUIA (CON PROXY CLOUDFLARE) =================
+// ================= BUSCADOR DE GUIA =================
 
 async function buscarGuia() {
   const guia = document.getElementById("guiaInput").value.trim();
@@ -145,8 +146,6 @@ async function buscarGuia() {
   }
 
   resultado.innerHTML = "🔎 Buscando...";
-
-  const proxyUrl = "https://rebyte-proxy.re-byte19.workers.dev";
 
   try {
     const res = await fetch(
@@ -173,7 +172,9 @@ async function buscarGuia() {
     `;
 
   } catch (err) {
-    console.error("FETCH ERROR:", err);
+    console.error(err);
     resultado.innerHTML = "❌ Error consultando guía.";
   }
 }
+
+
