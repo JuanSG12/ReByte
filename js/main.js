@@ -135,7 +135,7 @@ form.addEventListener("submit", () => {
 
 // ================= BUSCADOR DE GUIA =================
 
-async function buscarGuia() {
+function buscarGuia() {
   const guia = document.getElementById("guiaInput").value.trim();
   const resultado = document.getElementById("resultadoGuia");
 
@@ -146,12 +146,13 @@ async function buscarGuia() {
 
   resultado.innerHTML = "🔎 Buscando...";
 
-  try {
-    const res = await fetch(
-      proxyUrl + "?guia=" + encodeURIComponent(guia)
-    );
+  // 🔥 nombre único para evitar conflictos
+  const callbackName = "respuestaGuia_" + Date.now();
 
-    const data = await res.json();
+  window[callbackName] = function(data) {
+
+    // 🧹 limpiar script después de ejecutar
+    delete window[callbackName];
 
     if (!data.encontrado) {
       resultado.innerHTML = "❌ Guía no encontrada.";
@@ -167,24 +168,18 @@ async function buscarGuia() {
 
         ${
           data.foto
-            ? `<img 
-                src="${convertDriveLink(data.foto)}" 
-                style="width:100%;border-radius:14px;margin:12px 0;"
-              >`
+            ? `<img src="${convertDriveLink(data.foto)}" style="width:100%;border-radius:14px;margin:12px 0;">`
             : ""
         }
 
         <button class="btn" onclick="location.reload()">Cerrar</button>
       </div>
     `;
+  };
 
-  } catch (err) {
-    console.error(err);
-    resultado.innerHTML = "❌ Error consultando guía.";
-  }
-}
-function copiarGuia() {
-  const guia = document.getElementById("guiaGenerada").innerText;
-  navigator.clipboard.writeText(guia);
-  alert("✅ Guía copiada al portapapeles");
+  const script = document.createElement("script");
+
+  script.src = `https://script.google.com/macros/s/AKfycbzrvmO2bQUXWSl6nrnaFrDhIBI06cMwW_UceYq3U0QqjHVqh2IMPzeEzlF4TuCtxEN8mw/exec?guia=${encodeURIComponent(guia)}&callback=${callbackName}`;
+
+  document.body.appendChild(script);
 }
