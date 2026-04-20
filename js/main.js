@@ -127,39 +127,19 @@ function closePlan() {
   document.getElementById("planModal").style.display = "none";
 }
 
-// ===== FORMULARIO (FIX REAL) =====
+// ===== FORMULARIO (SIN FETCH - FUNCIONA CON APPS SCRIPT) =====
 const form = document.getElementById("contactForm");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+form.addEventListener("submit", () => {
+  // 👉 generar guía en frontend
+  const guia = "RB-" + Date.now();
 
-  const formData = new FormData(form);
+  document.getElementById("guiaGenerada").innerText = guia;
 
-  try {
-    const res = await fetch(
-      "https://script.google.com/macros/s/AKfycbzrvmO2bQUXWSl6nrnaFrDhIBI06cMwW_UceYq3U0QqjHVqh2IMPzeEzlF4TuCtxEN8mw/exec",
-      {
-        method: "POST",
-        body: formData
-      }
-    );
-
-    const data = await res.json();
-
-    if (!data.ok) {
-      alert("❌ Error en servidor");
-      return;
-    }
-
-    document.getElementById("guiaGenerada").innerText = data.guia;
+  // 👉 mostrar modal
+  setTimeout(() => {
     document.getElementById("confirmModal").style.display = "flex";
-
-    form.reset();
-
-  } catch (err) {
-    console.error(err);
-    alert("❌ Error enviando formulario");
-  }
+  }, 1200);
 });
 
 // ===== BUSCADOR =====
