@@ -61,7 +61,7 @@ function animate() {
 init();
 animate();
 
-// Dropdown persistente
+// Dropdown
 const dropBtn = document.querySelector(".dropbtn");
 const dropdown = document.querySelector(".dropdown-content");
 
@@ -73,6 +73,8 @@ dropBtn.addEventListener("click", (e) => {
 document.addEventListener("click", () => {
   dropdown.classList.remove("show");
 });
+
+// PLANES
 const plans = {
   "Básico": {
     desc: "Ideal para equipos personales o uso básico.",
@@ -124,17 +126,43 @@ function openPlan(planName) {
 function closePlan() {
   document.getElementById("planModal").style.display = "none";
 }
-// ===== CONFIRMACION FORMULARIO =====
+
+// ===== FORMULARIO (FIX REAL) =====
 const form = document.getElementById("contactForm");
 
-form.addEventListener("submit", () => {
-  setTimeout(() => {
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  try {
+    const res = await fetch(
+      "https://script.google.com/macros/s/AKfycbzrvmO2bQUXWSl6nrnaFrDhIBI06cMwW_UceYq3U0QqjHVqh2IMPzeEzlF4TuCtxEN8mw/exec",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      alert("❌ Error en servidor");
+      return;
+    }
+
+    document.getElementById("guiaGenerada").innerText = data.guia;
     document.getElementById("confirmModal").style.display = "flex";
-  }, 1200);
+
+    form.reset();
+
+  } catch (err) {
+    console.error(err);
+    alert("❌ Error enviando formulario");
+  }
 });
 
-// ================= BUSCADOR DE GUIA =================
-
+// ===== BUSCADOR =====
 function buscarGuia() {
   const guia = document.getElementById("guiaInput").value.trim();
   const resultado = document.getElementById("resultadoGuia");
@@ -146,12 +174,9 @@ function buscarGuia() {
 
   resultado.innerHTML = "🔎 Buscando...";
 
-  // 🔥 nombre único para evitar conflictos
   const callbackName = "respuestaGuia_" + Date.now();
 
   window[callbackName] = function(data) {
-
-    // 🧹 limpiar script después de ejecutar
     delete window[callbackName];
 
     if (!data.encontrado) {
@@ -182,4 +207,18 @@ function buscarGuia() {
   script.src = `https://script.google.com/macros/s/AKfycbzrvmO2bQUXWSl6nrnaFrDhIBI06cMwW_UceYq3U0QqjHVqh2IMPzeEzlF4TuCtxEN8mw/exec?guia=${encodeURIComponent(guia)}&callback=${callbackName}`;
 
   document.body.appendChild(script);
+}
+
+// ===== UTIL =====
+function convertDriveLink(url) {
+  if (!url) return "";
+
+  if (url.includes("drive.google.com")) {
+    const match = url.match(/\/d\/([^\/]+)/);
+    if (match && match[1]) {
+      return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+    }
+  }
+
+  return url;
 }
