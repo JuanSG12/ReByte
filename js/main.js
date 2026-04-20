@@ -127,16 +127,23 @@ function closePlan() {
   document.getElementById("planModal").style.display = "none";
 }
 
-// ===== FORMULARIO (SIN FETCH - FUNCIONA CON APPS SCRIPT) =====
+// ===== FORMULARIO (CORREGIDO CON GUIA REAL) =====
 const form = document.getElementById("contactForm");
 
 form.addEventListener("submit", () => {
-  // 👉 generar guía en frontend
   const guia = "RB-" + Date.now();
 
+  // 👉 enviar guía al Apps Script
+  const inputGuia = document.createElement("input");
+  inputGuia.type = "hidden";
+  inputGuia.name = "guia";
+  inputGuia.value = guia;
+
+  form.appendChild(inputGuia);
+
+  // 👉 mostrar guía correcta al usuario
   document.getElementById("guiaGenerada").innerText = guia;
 
-  // 👉 mostrar modal
   setTimeout(() => {
     document.getElementById("confirmModal").style.display = "flex";
   }, 1200);
