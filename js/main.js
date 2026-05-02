@@ -1,211 +1,219 @@
-const proxyUrl = "https://rebyte-proxy.re-byte19.workers.dev";
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
+/* ============================================================
+   REBYTE — main.js
+   ============================================================ */
 
-function resize() {
-  canvas.width = window.innerWidth;
+// ── Stars canvas ────────────────────────────────────────────
+const canvas = document.getElementById("stars");
+const ctx    = canvas.getContext("2d");
+
+function resizeCanvas() {
+  canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
 }
-resize();
-window.addEventListener("resize", resize);
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
-let stars = [];
-const STAR_COUNT = 150;
+const STAR_COUNT = 130;
+const stars = Array.from({ length: STAR_COUNT }, () => ({
+  x:  Math.random() * canvas.width,
+  y:  Math.random() * canvas.height,
+  r:  Math.random() * 1.2 + 0.3,
+  dx: (Math.random() - 0.5) * 0.25,
+  dy: (Math.random() - 0.5) * 0.25,
+  o:  Math.random() * 0.5 + 0.3,
+}));
 
-class Star {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.r = Math.random() * 1.5 + 0.5;
-    this.dx = (Math.random() - 0.5) * 0.3;
-    this.dy = (Math.random() - 0.5) * 0.3;
-  }
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    s.x += s.dx;
+    s.y += s.dy;
+    if (s.x < 0) s.x = canvas.width;
+    if (s.x > canvas.width)  s.x = 0;
+    if (s.y < 0) s.y = canvas.height;
+    if (s.y > canvas.height) s.y = 0;
 
-  draw() {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fillStyle = "white";
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${s.o})`;
     ctx.fill();
-  }
-
-  update() {
-    this.x += this.dx;
-    this.y += this.dy;
-
-    if (this.x < 0) this.x = canvas.width;
-    if (this.x > canvas.width) this.x = 0;
-    if (this.y < 0) this.y = canvas.height;
-    if (this.y > canvas.height) this.y = 0;
-  }
-}
-
-function init() {
-  stars = [];
-  for (let i = 0; i < STAR_COUNT; i++) {
-    stars.push(new Star());
-  }
-}
-
-function animate() {
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  stars.forEach(star => {
-    star.update();
-    star.draw();
   });
-
-  requestAnimationFrame(animate);
+  requestAnimationFrame(drawStars);
 }
+drawStars();
 
-init();
-animate();
+// ── Header scroll ───────────────────────────────────────────
+const header = document.getElementById("header");
+window.addEventListener("scroll", () => {
+  header.classList.toggle("scrolled", window.scrollY > 20);
+}, { passive: true });
 
-// Dropdown
-const dropBtn = document.querySelector(".dropbtn");
-const dropdown = document.querySelector(".dropdown-content");
+// ── Mobile nav toggle ───────────────────────────────────────
+const navToggle = document.getElementById("navToggle");
+const nav       = document.getElementById("nav");
 
-dropBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  dropdown.classList.toggle("show");
+navToggle.addEventListener("click", () => {
+  nav.classList.toggle("open");
 });
 
-document.addEventListener("click", () => {
-  dropdown.classList.remove("show");
+// Close nav when a link is clicked
+nav.querySelectorAll(".nav-link").forEach(link => {
+  link.addEventListener("click", () => nav.classList.remove("open"));
 });
 
-// PLANES
+// ── Plans data ──────────────────────────────────────────────
 const plans = {
   "Básico": {
     desc: "Ideal para equipos personales o uso básico.",
     features: [
-      "Chequeo anual",
-      "Soporte remoto 72h",
-      "Descuento en repuestos"
+      "Chequeo anual completo",
+      "Soporte remoto en 72 horas",
+      "Descuento en repuestos",
     ]
   },
   "Profesional": {
-    desc: "Perfecto para negocios y trabajo continuo.",
+    desc: "Perfecto para profesionales y negocios en operación continua.",
     features: [
       "Mantenimiento semestral",
-      "Soporte remoto 24h",
-      "1 visita in sitio"
+      "Soporte remoto en 24 horas",
+      "1 visita in situ incluida",
     ]
   },
   "Corporativo": {
-    desc: "Pensado para empresas y operaciones críticas.",
+    desc: "Pensado para empresas con operaciones críticas.",
     features: [
       "Soporte ilimitado",
-      "Prioridad 24/7",
-      "Contrato y SLA"
+      "Atención prioritaria 24/7",
+      "Contrato y SLA garantizado",
     ]
   }
 };
 
+// ── Open plan modal ─────────────────────────────────────────
 function openPlan(planName) {
   const modal = document.getElementById("planModal");
+  const plan  = plans[planName];
 
   document.getElementById("planTitle").innerText = planName;
-  document.getElementById("planDescription").innerText = plans[planName].desc;
+  document.getElementById("planDescription").innerText = plan.desc;
 
   const list = document.getElementById("planFeatures");
-  list.innerHTML = "";
-  plans[planName].features.forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = "✔ " + item;
-    list.appendChild(li);
-  });
+  list.innerHTML = plan.features.map(f => `<li>${f}</li>`).join("");
 
-  const whatsappMsg = `Hola, quiero contratar el plan ${planName} de ReByte`;
-  document.getElementById("planWhatsapp").href =
-    `https://wa.me/573125710763?text=${encodeURIComponent(whatsappMsg)}`;
+  const msg = encodeURIComponent(`Hola, quiero contratar el plan ${planName} de Rebyte`);
+  document.getElementById("planWhatsapp").href = `https://wa.me/573125710763?text=${msg}`;
 
-  modal.style.display = "flex";
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
 }
 
 function closePlan() {
-  document.getElementById("planModal").style.display = "none";
+  document.getElementById("planModal").classList.remove("open");
+  document.body.style.overflow = "";
 }
 
-// ===== FORMULARIO (CORREGIDO CON GUIA REAL) =====
+// ── Confirm modal ───────────────────────────────────────────
+function closeConfirm() {
+  document.getElementById("confirmModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function copiarGuia() {
+  const guia = document.getElementById("guiaGenerada").innerText;
+  navigator.clipboard.writeText(guia).then(() => {
+    const btn = document.querySelector("#confirmModal .cta-btn span");
+    const original = btn.innerText;
+    btn.innerText = "¡Copiado!";
+    setTimeout(() => { btn.innerText = original; }, 2000);
+  });
+}
+
+// ── Contact form ─────────────────────────────────────────────
 const form = document.getElementById("contactForm");
 
-form.addEventListener("submit", () => {
+form.addEventListener("submit", (e) => {
   const guia = "RB-" + Date.now();
 
-  // 👉 enviar guía al Apps Script
-  const inputGuia = document.createElement("input");
-  inputGuia.type = "hidden";
-  inputGuia.name = "guia";
-  inputGuia.value = guia;
+  // Attach tracking number to form submission
+  let hiddenGuia = form.querySelector('input[name="guia"]');
+  if (!hiddenGuia) {
+    hiddenGuia = document.createElement("input");
+    hiddenGuia.type = "hidden";
+    hiddenGuia.name = "guia";
+    form.appendChild(hiddenGuia);
+  }
+  hiddenGuia.value = guia;
 
-  form.appendChild(inputGuia);
-
-  // 👉 mostrar guía correcta al usuario
   document.getElementById("guiaGenerada").innerText = guia;
 
+  const submitBtn = form.querySelector(".form-submit span");
+  submitBtn.innerText = "Enviando...";
+
   setTimeout(() => {
-    document.getElementById("confirmModal").style.display = "flex";
+    submitBtn.innerText = "Enviar mensaje";
+    document.getElementById("confirmModal").classList.add("open");
+    document.body.style.overflow = "hidden";
+    form.reset();
   }, 1200);
 });
 
-// ===== BUSCADOR =====
+// ── Tracking / guide search ──────────────────────────────────
 function buscarGuia() {
-  const guia = document.getElementById("guiaInput").value.trim();
+  const guia      = document.getElementById("guiaInput").value.trim();
   const resultado = document.getElementById("resultadoGuia");
 
   if (!guia) {
-    resultado.innerHTML = "⚠️ Ingresa una guía.";
+    resultado.innerHTML = `<span style="color:var(--text-3)">⚠ Ingresa un número de guía.</span>`;
     return;
   }
 
-  resultado.innerHTML = "🔎 Buscando...";
+  resultado.innerHTML = `<span style="color:var(--text-3)">Buscando...</span>`;
 
-  const callbackName = "respuestaGuia_" + Date.now();
+  const callbackName = "cb_" + Date.now();
 
   window[callbackName] = function(data) {
     delete window[callbackName];
 
     if (!data.encontrado) {
-      resultado.innerHTML = "❌ Guía no encontrada.";
+      resultado.innerHTML = `<span style="color:var(--text-3)">No se encontró la guía <strong style="color:var(--text)">${guia}</strong>.</span>`;
       return;
     }
 
     resultado.innerHTML = `
-      <div class="plan-card destacado" style="margin:auto;max-width:320px;">
-        <h3>🔧 Estado del mantenimiento</h3>
+      <div class="result-card">
+        <h4>Estado del servicio</h4>
         <p><strong>Guía:</strong> ${guia}</p>
         <p><strong>Estado:</strong> ${data.estado}</p>
-        <p>${data.comentario || ""}</p>
-
-        ${
-          data.foto
-            ? `<img src="${convertDriveLink(data.foto)}" style="width:100%;border-radius:14px;margin:12px 0;">`
-            : ""
-        }
-
-        <button class="btn" onclick="location.reload()">Cerrar</button>
+        ${data.comentario ? `<p>${data.comentario}</p>` : ""}
+        ${data.foto ? `<img src="${convertDriveLink(data.foto)}" alt="Foto del servicio">` : ""}
       </div>
     `;
   };
 
   const script = document.createElement("script");
-
   script.src = `https://script.google.com/macros/s/AKfycbzrvmO2bQUXWSl6nrnaFrDhIBI06cMwW_UceYq3U0QqjHVqh2IMPzeEzlF4TuCtxEN8mw/exec?guia=${encodeURIComponent(guia)}&callback=${callbackName}`;
-
   document.body.appendChild(script);
 }
 
-// ===== UTIL =====
+// Allow Enter key on search box
+document.getElementById("guiaInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") buscarGuia();
+});
+
+// ── Utility ─────────────────────────────────────────────────
 function convertDriveLink(url) {
   if (!url) return "";
-
   if (url.includes("drive.google.com")) {
-    const match = url.match(/\/d\/([^\/]+)/);
-    if (match && match[1]) {
-      return `https://drive.google.com/uc?export=view&id=${match[1]}`;
-    }
+    const match = url.match(/\/d\/([^/]+)/);
+    if (match?.[1]) return `https://drive.google.com/uc?export=view&id=${match[1]}`;
   }
-
   return url;
 }
+
+// ── Keyboard: close modals with Escape ──────────────────────
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closePlan();
+    closeConfirm();
+  }
+});
