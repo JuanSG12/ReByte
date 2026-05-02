@@ -166,28 +166,32 @@ function copiarGuia() {
 // ── Contact form ─────────────────────────────────────────────
 const form = document.getElementById("contactForm");
 
-form.addEventListener("submit", function(e) {
-  e.preventDefault(); // Stop native form submission completely
+// Pre-create hidden guia field
+const hiddenGuia = document.createElement("input");
+hiddenGuia.type  = "hidden";
+hiddenGuia.name  = "guia";
+form.appendChild(hiddenGuia);
 
+form.addEventListener("submit", function(e) {
+  // Generate guia and assign BEFORE the form submits natively
   const guia = "RB-" + Date.now();
+  hiddenGuia.value = guia;
+
+  // Show in modal
   document.getElementById("guiaGenerada").innerText = guia;
 
   const submitBtn = form.querySelector(".form-submit span");
   submitBtn.innerText = "Enviando...";
 
-  // Build form data with the SAME guia
-  const data = new FormData(form);
-  data.append("guia", guia);
-
-  // Send to Google Sheets via fetch
-  fetch(form.action, { method: "POST", body: data })
-    .catch(() => {}) // Google Sheets returns CORS error but still saves — ignore it
-    .finally(function() {
-      submitBtn.innerText = "Enviar mensaje";
-      document.getElementById("confirmModal").classList.add("open");
-      document.body.style.overflow = "hidden";
-      form.reset();
-    });
+  setTimeout(function() {
+    submitBtn.innerText = "Enviar mensaje";
+    document.getElementById("confirmModal").classList.add("open");
+    document.body.style.overflow = "hidden";
+    form.reset();
+    // Restore hidden field after reset (reset clears it)
+    hiddenGuia.value = guia;
+  }, 1200);
+  // Let the form submit natively to the iframe — do NOT call e.preventDefault()
 });
 
 // ── Tracking / guide search ──────────────────────────────────
