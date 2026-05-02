@@ -84,15 +84,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: -0.02em;
+  font-size: 1.4rem;
+  letter-spacing: 0;
   flex-shrink: 0;
 }
 .header-logo img {
-  height: 52px;
+  height: 64px;
   width: auto;
 }
 
@@ -224,10 +224,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 0em;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
   margin-bottom: 24px;
 }
 .hero-title em {
