@@ -1056,7 +1056,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     gap: 0;
     padding: 16px;
     border-bottom: 1px solid var(--border);
-    transform: translateY(-110%);
+    transform: translateY(-200%);
     transition: transform var(--transition);
     margin-left: 0;
     pointer-events: none;
