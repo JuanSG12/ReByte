@@ -92,7 +92,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   flex-shrink: 0;
 }
 .header-logo img {
-  height: 36px;
+  height: 52px;
   width: auto;
 }
 
@@ -196,7 +196,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 #stars {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
@@ -227,7 +227,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: clamp(2.4rem, 6vw, 4.8rem);
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: 0em;
   margin-bottom: 24px;
 }
 .hero-title em {
