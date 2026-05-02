@@ -67,7 +67,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   z-index: 100;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
   padding: 0 40px;
   height: 72px;
   background: rgba(6,8,16,0.75);
@@ -1032,6 +1032,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 @media (max-width: 768px) {
   #header { padding: 0 20px; }
+
+  .header-logo img { height: 40px; }
+  .header-logo span { font-size: 1rem; }
 
   .nav {
     position: fixed;
