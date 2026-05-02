@@ -1,0 +1,302 @@
+/* ============================================================
+   REBYTE — nosotros.css
+   ============================================================ */
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.nos-hero {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 140px 40px 80px;
+  overflow: hidden;
+}
+
+.nos-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+
+.nos-hero-content .section-tag {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.nos-hero-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  margin-bottom: 20px;
+}
+
+.nos-hero-content h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.nos-hero-content p {
+  font-size: 1.05rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ── Sections base ─────────────────────────────────────────── */
+.nos-section {
+  padding: 100px 40px;
+  border-top: 1px solid var(--border);
+}
+
+.nos-section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Historia ──────────────────────────────────────────────── */
+.nos-historia {
+  background: var(--bg-2);
+}
+
+.nos-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.nos-text .section-tag { margin-bottom: 14px; display: block; }
+
+.nos-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.nos-text p {
+  color: var(--text-2);
+  line-height: 1.75;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+}
+
+.nos-visual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.nos-card-stat {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.nos-card-stat:hover {
+  border-color: var(--border-h);
+  box-shadow: var(--shadow-accent);
+}
+
+.nos-stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.nos-stat-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  margin-top: 6px;
+}
+
+/* ── Valores ───────────────────────────────────────────────── */
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.valor-card {
+  background: var(--bg-2);
+  padding: 40px 28px;
+  transition: background var(--transition);
+}
+
+.valor-card:hover { background: var(--bg-3); }
+
+.valor-icon {
+  font-size: 2rem;
+  margin-bottom: 18px;
+  display: block;
+}
+
+.valor-card h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.valor-card p {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* ── Equipo ────────────────────────────────────────────────── */
+.nos-equipo { background: var(--bg-2); }
+
+.equipo-grid {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.equipo-card {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.equipo-card:hover {
+  border-color: var(--border-h);
+  box-shadow: var(--shadow-accent);
+}
+
+.equipo-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--bg);
+  margin: 0 auto 20px;
+}
+
+.equipo-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.equipo-rol {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.equipo-card p {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.equipo-wa {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: opacity var(--transition);
+}
+.equipo-wa:hover { opacity: 0.7; }
+
+/* ── CTA final ─────────────────────────────────────────────── */
+.nos-cta {
+  border-top: 1px solid var(--border);
+  padding: 120px 40px;
+  text-align: center;
+  background: linear-gradient(180deg, transparent 0%, rgba(37,99,235,0.05) 50%, transparent 100%);
+}
+
+.nos-cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.nos-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.nos-cta p {
+  color: var(--text-2);
+  margin-bottom: 36px;
+  font-size: 1rem;
+}
+
+.nos-cta-btns {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Nav active link ───────────────────────────────────────── */
+.nav-link--active {
+  color: var(--accent) !important;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nos-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .valores-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .nos-section { padding: 80px 24px; }
+  .nos-hero { padding: 120px 24px 60px; }
+  .valores-grid { grid-template-columns: 1fr; }
+  .nos-visual { grid-template-columns: 1fr 1fr; }
+  .nos-cta { padding: 80px 24px; }
+  .nos-cta-btns { flex-direction: column; align-items: stretch; }
+}
