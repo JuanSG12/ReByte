@@ -165,33 +165,36 @@ function copiarGuia() {
 
 // ── Contact form ─────────────────────────────────────────────
 const form = document.getElementById("contactForm");
-
-// Pre-create hidden guia field
-const hiddenGuia = document.createElement("input");
-hiddenGuia.type  = "hidden";
-hiddenGuia.name  = "guia";
-form.appendChild(hiddenGuia);
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzrvmO2bQUXWSl6nrnaFrDhIBI06cMwW_UceYq3U0QqjHVqh2IMPzeEzlF4TuCtxEN8mw/exec";
 
 form.addEventListener("submit", function(e) {
-  // Generate guia and assign BEFORE the form submits natively
-  const guia = "RB-" + Date.now();
-  hiddenGuia.value = guia;
-
-  // Show in modal
-  document.getElementById("guiaGenerada").innerText = guia;
+  e.preventDefault();
 
   const submitBtn = form.querySelector(".form-submit span");
   submitBtn.innerText = "Enviando...";
 
-  setTimeout(function() {
-    submitBtn.innerText = "Enviar mensaje";
-    document.getElementById("confirmModal").classList.add("open");
-    document.body.style.overflow = "hidden";
-    form.reset();
-    // Restore hidden field after reset (reset clears it)
-    hiddenGuia.value = guia;
-  }, 1200);
-  // Let the form submit natively to the iframe — do NOT call e.preventDefault()
+  const data = new FormData(form);
+
+  // Send via no-cors fetch (CORS will block response but data arrives at Sheet)
+  // So we generate guia here and append it — Sheet will use it since we removed the fallback
+  const guia = "RB-" + Date.now();
+  data.append("guia", guia);
+
+  fetch(SCRIPT_URL, { method: "POST", body: data, mode: "no-cors" })
+    .then(function() {
+      document.getElementById("guiaGenerada").innerText = guia;
+      submitBtn.innerText = "Enviar mensaje";
+      document.getElementById("confirmModal").classList.add("open");
+      document.body.style.overflow = "hidden";
+      form.reset();
+    })
+    .catch(function() {
+      document.getElementById("guiaGenerada").innerText = guia;
+      submitBtn.innerText = "Enviar mensaje";
+      document.getElementById("confirmModal").classList.add("open");
+      document.body.style.overflow = "hidden";
+      form.reset();
+    });
 });
 
 // ── Tracking / guide search ──────────────────────────────────
