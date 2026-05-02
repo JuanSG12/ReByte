@@ -137,7 +137,7 @@ function openPlan(planName) {
   document.getElementById("planFeatures").innerHTML = plan.features
     .map(f => `<li>${f}</li>`).join("");
   const msg = encodeURIComponent(`Hola, quiero contratar el plan ${planName} de Rebyte`);
-  document.getElementById("planWhatsapp").href = `https://wa.me/573125710763?text=${msg}`;
+  document.getElementById("planWhatsapp").href = `https://wa.me/573153442706?text=${msg}`;
   document.getElementById("planModal").classList.add("open");
   document.body.style.overflow = "hidden";
 }
@@ -218,7 +218,7 @@ function buscarGuia() {
         <h4>Estado del servicio</h4>
         <p><strong>Guía:</strong> ${guia}</p>
         <p><strong>Estado:</strong> ${data.estado}</p>
-        ${data.comentario ? `<p>${data.comentario}</p>` : ""}
+        ${data.comentario ? `<p><strong>Comentario:</strong> ${data.comentario}</p>` : ""}
         ${data.foto ? `<img src="${convertDriveLink(data.foto)}" alt="Foto">` : ""}
       </div>`;
   };
