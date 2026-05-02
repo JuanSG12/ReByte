@@ -165,19 +165,22 @@ function copiarGuia() {
 
 // ── Contact form ─────────────────────────────────────────────
 const form = document.getElementById("contactForm");
+
+// Pre-create the hidden guia field
+const hiddenGuia = document.createElement("input");
+hiddenGuia.type = "hidden";
+hiddenGuia.name = "guia";
+form.appendChild(hiddenGuia);
+
 form.addEventListener("submit", function() {
+  // Generate once, assign to both hidden field and modal display
   const guia = "RB-" + Date.now();
-  let hiddenGuia = form.querySelector('input[name="guia"]');
-  if (!hiddenGuia) {
-    hiddenGuia = document.createElement("input");
-    hiddenGuia.type = "hidden";
-    hiddenGuia.name = "guia";
-    form.appendChild(hiddenGuia);
-  }
   hiddenGuia.value = guia;
   document.getElementById("guiaGenerada").innerText = guia;
+
   const submitBtn = form.querySelector(".form-submit span");
   submitBtn.innerText = "Enviando...";
+
   setTimeout(function() {
     submitBtn.innerText = "Enviar mensaje";
     document.getElementById("confirmModal").classList.add("open");
