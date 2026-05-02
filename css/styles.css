@@ -84,12 +84,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.4rem;
   letter-spacing: 0;
   flex-shrink: 0;
+  width: auto;
 }
 .header-logo img {
   height: 64px;
@@ -1036,15 +1037,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   #header {
     padding: 0 16px;
     gap: 8px;
-    height: 60px;
+    height: 64px;
   }
 
-  .header-logo img { height: 32px; }
-  .header-logo span { font-size: 0.95rem; }
+  .header-logo img { height: 44px; }
+  .header-logo span { font-size: 1.1rem; }
 
   .nav {
     position: fixed;
-    top: 60px;
+    top: 64px;
     left: 0;
     right: 0;
     z-index: 99;
@@ -1058,8 +1059,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     transform: translateY(-110%);
     transition: transform var(--transition);
     margin-left: 0;
+    pointer-events: none;
   }
-  .nav.open { transform: translateY(0); }
+  .nav.open {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
   .nav-link { padding: 14px 16px; width: 100%; }
 
   .header-cta { display: none; }
