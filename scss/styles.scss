@@ -1,0 +1,378 @@
+// ============================================================
+//   REBYTE — styles.scss (variables, anidación, interpolación)
+// ============================================================
+
+// ── Variables Sass (requisito: 5 variables) ─────────────────
+$color-accent:      #2563eb;
+$color-accent-2:    #7c3aed;
+$color-bg:          #0a0f1c;
+$color-text:        #f1f5f9;
+$color-text-2:      #94a3b8;
+$color-text-3:      #475569;
+$color-border:      rgba(255, 255, 255, 0.08);
+$color-border-h:    rgba(255, 255, 255, 0.18);
+$color-bg-2:        #0f1623;
+$color-bg-3:        #161d2e;
+$font-display:      'Syne', sans-serif;
+$font-body:         'DM Sans', sans-serif;
+$radius-sm:         8px;
+$radius-md:         12px;
+$radius-lg:         18px;
+$transition:        0.25s ease;
+
+// ── Reset & base ────────────────────────────────────────────
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --accent:      #{$color-accent};
+  --accent-2:    #{$color-accent-2};
+  --bg:          #{$color-bg};
+  --bg-2:        #{$color-bg-2};
+  --bg-3:        #{$color-bg-3};
+  --text:        #{$color-text};
+  --text-2:      #{$color-text-2};
+  --text-3:      #{$color-text-3};
+  --border:      #{$color-border};
+  --border-h:    #{$color-border-h};
+  --font-display: #{$font-display};
+  --font-body:   #{$font-body};
+  --radius-sm:   #{$radius-sm};
+  --radius-md:   #{$radius-md};
+  --radius-lg:   #{$radius-lg};
+  --transition:  #{$transition};
+  --shadow-accent: 0 0 0 1px #{$color-accent}, 0 8px 32px rgba(37,99,235,0.15);
+}
+
+html {
+  font-family: $font-body;
+  background: $color-bg;
+  color: $color-text;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+// ── Interpolación 1: clases de color por nombre ─────────────
+// Genera .text-accent, .text-accent-2, .text-muted
+$color-names: (
+  "accent":   $color-accent,
+  "accent-2": $color-accent-2,
+  "muted":    $color-text-2,
+);
+
+@each $name, $value in $color-names {
+  .text-#{$name} {
+    color: $value;
+  }
+}
+
+// ── Interpolación 2: clases de fondo por capa ───────────────
+$bg-layers: (
+  "base":  $color-bg,
+  "card":  $color-bg-2,
+  "deep":  $color-bg-3,
+);
+
+@each $layer, $value in $bg-layers {
+  .bg-#{$layer} {
+    background-color: $value;
+  }
+}
+
+// ── Section tag ─────────────────────────────────────────────
+.section-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-accent;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 100px;
+  padding: 5px 14px;
+}
+
+// ── Section header ───────────────────────────────────────────
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+
+  h2 {
+    font-family: $font-display;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 16px 0 0;
+  }
+
+  p {
+    margin-top: 14px;
+    color: $color-text-2;
+    font-size: 1rem;
+  }
+
+  .section-tag {
+    margin-bottom: 14px;
+  }
+}
+
+// ── Fade-in animation ────────────────────────────────────────
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// ── Header ──────────────────────────────────────────────────
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  transition: background $transition, padding $transition, border-bottom $transition;
+  border-bottom: 1px solid transparent;
+
+  &.scrolled {
+    background: rgba(10, 15, 28, 0.85);
+    backdrop-filter: blur(12px);
+    padding: 14px 40px;
+    border-bottom: 1px solid $color-border;
+  }
+
+  // Anidación: logo dentro del header
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 1.15rem;
+
+    img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+  }
+
+  // Anidación: nav dentro del header
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    .nav-link {
+      font-size: 0.875rem;
+      color: $color-text-2;
+      transition: color $transition;
+
+      &:hover,
+      &.nav-link--active {
+        color: $color-text;
+      }
+    }
+  }
+
+  .header-cta {
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 9px 20px;
+    border-radius: 100px;
+    border: 1px solid $color-accent;
+    color: $color-text;
+    transition: background $transition;
+
+    &:hover {
+      background: $color-accent;
+    }
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: $color-text;
+      border-radius: 2px;
+      transition: $transition;
+    }
+  }
+}
+
+// ── Buttons ──────────────────────────────────────────────────
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: $color-accent;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 13px 28px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: background $transition, transform $transition;
+
+  &:hover {
+    background: darken($color-accent, 8%);
+    transform: translateY(-1px);
+  }
+}
+
+.cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: $color-text-2;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+// ── Stars canvas ─────────────────────────────────────────────
+canvas#stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+// ── Footer ──────────────────────────────────────────────────
+.footer {
+  border-top: 1px solid $color-border;
+  padding: 60px 40px;
+  text-align: center;
+
+  .footer-inner {
+    max-width: 400px;
+    margin: 0 auto;
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+
+      .footer-logo {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+      }
+    }
+
+    .footer-tagline {
+      font-size: 0.875rem;
+      color: $color-text-2;
+      margin-bottom: 8px;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: $color-text-3;
+    }
+  }
+}
+
+// ── WhatsApp float ───────────────────────────────────────────
+.wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99;
+  width: 52px;
+  height: 52px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+  transition: transform $transition;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+}
+
+// ── Responsive ──────────────────────────────────────────────
+@media (max-width: 768px) {
+  #header {
+    padding: 18px 24px;
+
+    .nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: $color-bg;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      z-index: 99;
+
+      &.open {
+        display: flex;
+      }
+
+      .nav-link {
+        font-size: 1.2rem;
+      }
+    }
+
+    .header-cta {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: flex;
+      z-index: 100;
+    }
+  }
+}
